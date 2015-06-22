@@ -17,7 +17,10 @@
 
     {#} Base styles {#}
     <link href="{% static 'css/normalize.css' %}" rel="stylesheet" media="all">
-    {#<link type="text/less" rel="stylesheet" href="static/less/style.less" charset="utf-8">#}
+    <link type="text/less" rel="stylesheet" href="{% static 'less/style.less' %}" charset="utf-8">
+
+    {#} LESS Compiler {#}
+    <script src="{% static 'js/less.js' %}" type="text/javascript"></script>
     
     {% comment %}
     <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
@@ -43,6 +46,11 @@
 
     {# Main navigation #}
     <nav role="navigation">
+
+        {# Main nav shows up only after authentication #}
+        {% if user.is_authenticated %}
+        {% include "nav.html" %}
+        {% endif %}
 
         {#} Template nav content {#}
         {% block nav %}

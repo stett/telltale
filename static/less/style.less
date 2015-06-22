@@ -1,1 +1,114 @@
-background: gray;
+@import url("variables.less");
+@import url("mixins.less");
+@import url("elements.less");
+@import url(http://fonts.googleapis.com/css?family=Slabo+27px);
+
+/*
+ * Base
+ */
+
+html {
+    background: @background-color;
+    color: @text-color;
+}
+
+a {
+    color: @accent-color;
+    text-decoration: none;
+
+    &:hover {
+        color: lighten(@accent-color, 10%);
+    }
+
+    &:active {
+        color: darken(@accent-color, 10%);
+    }
+}
+
+h1, h2, h3 {
+    font-family: 'Slabo 27px', serif;
+    color: @accent-color;
+}
+
+/*
+ * Nav
+ */
+
+nav {
+    position: absolute;
+    width: 64px;
+    text-align: center;
+}
+
+nav ul {
+    padding: 0;
+}
+
+nav ul li {
+    list-style-type: none;
+
+    a {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border: 1px solid @text-color;
+        border-radius: 16px;
+        margin: 0 0 10px 0;
+
+        &:hover {
+            .shadow;
+        }
+    }
+}
+
+/*
+ * Forms
+ */
+
+form {
+    display: inline-block;
+    padding: 20px;
+    margin: 0 0 20px 0;
+    background: lighten(@background-color, 10%);
+    border-radius: @radius;
+    text-align: left;
+    .shadow;
+}
+
+label {
+    display: block;
+    font-size: .8em;
+    margin: 0 0 5px 0;
+}
+
+input {
+    display: block;
+    margin: 0 0 15px 0;
+    padding: 5px;
+    background: lighten(@background-color, 20%);
+    border: none;
+    border-radius: @radius;
+}
+
+button[type='submit'] {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    background: @accent-color;
+    border: none;
+    border-radius: @radius;
+
+    &:hover {
+        .shadow;
+    }
+
+    &:active {}
+}
+
+/*
+ * Generic classes
+ */
+
+div.center {
+    text-align: center;
+}

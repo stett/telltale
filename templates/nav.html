@@ -1,0 +1,7 @@
+<span>[logo]</span>
+
+<ul>
+    <li><a href="{% if top_story %}{% url 'write-story' top_story.pk %}{% else %}#{% endif %}">wr</a></li>
+    <li><a href="{% url 'list-stories' %}">re</a></li>
+    <li><a href="{% url 'new-story' %}">+</a></li>
+</ul>

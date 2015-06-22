@@ -3,3 +3,47 @@
 {% block title %}
 Sign In
 {% endblock %}
+
+{% block content %}
+
+<div class="center">
+
+    {#} Form header {#}
+    <h1>Sign In</h1>
+
+    {#} Sign-up form {#}
+    <div>
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text"/>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password"/>
+
+        <button type="submit">Sign In</button>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </form>
+    </div>
+
+    {#} BAD: Don't embed styles, you fool... figure out how to generalize them! {#}
+
+    {#} Create-account link {#}
+    <div style="display: inline-block; width: 30%; text-align: right; padding-right: 5px">
+    <label>Don't have an account?</label>
+    <a href="{% url 'signup' %}">Create Account</a>
+    </div>
+
+    {#} Sign-in link {#}
+    <div style="display: inline-block; width: 30%; text-align: left; padding-left: 6px; border-left: 1px solid gray; margin-left: -1px">
+    <label>Forgot password or username?</label>
+    <a href="#">Recover Account</a>
+    </div>
+
+</div>
+
+{% endblock %}

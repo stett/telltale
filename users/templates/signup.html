@@ -3,3 +3,28 @@
 {% block title %}
 Sign Up
 {% endblock %}
+
+{% block content %}
+
+<div class="center">
+
+{#} Form header {#}
+<h1>Create Account</h1>
+
+{#} Sign-up form {#}
+<form method="post">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="text"/>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password"/>
+
+    <button type="submit">Create Account</button>
+</form>
+
+{#} Sign-in link {#}
+<label>Already have an account?</label>
+<a href="{% url 'signin' %}">Sign In</a>
+</div>
+
+{% endblock %}

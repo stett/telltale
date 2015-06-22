@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy
 
 
+@login_required(login_url=reverse_lazy('signin'))
 def list_stories_view(request):
     context = {
         'stories': [],
@@ -8,6 +11,7 @@ def list_stories_view(request):
     return render(request, 'list-stories.html', context)
 
 
+@login_required(login_url=reverse_lazy('signin'))
 def new_story_view(request):
     context = {
         'form': None,
@@ -15,6 +19,7 @@ def new_story_view(request):
     return render(request, 'new-story.html', context)
 
 
+@login_required(login_url=reverse_lazy('signin'))
 def join_story_view(request, pk):
     context = {
         'story': None,
@@ -22,6 +27,7 @@ def join_story_view(request, pk):
     return render(request, 'join-story.html', context)
 
 
+@login_required(login_url=reverse_lazy('signin'))
 def write_story_view(request, pk):
     context = {
         'story': None,
@@ -29,6 +35,7 @@ def write_story_view(request, pk):
     return render(request, 'write-story.html', context)
 
 
+@login_required(login_url=reverse_lazy('signin'))
 def read_story_view(request, pk):
     context = {
         'story': None,
