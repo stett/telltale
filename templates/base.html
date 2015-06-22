@@ -1,0 +1,70 @@
+{% load staticfiles %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {#} Page title {#}
+    <title>
+    {% block title %}
+    {% endblock %}
+    </title>
+    
+    {#} Meta data {#}
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {#} Base styles {#}
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet" media="all">
+    {#<link type="text/less" rel="stylesheet" href="static/less/style.less" charset="utf-8">#}
+    
+    {% comment %}
+    <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
+    <!--[if lt IE 9]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+    {% endcomment %}
+
+    {#} Template header content {#}
+    {% block head %}
+    {% endblock %}
+
+</head>
+<body>
+
+    <!-- The page header typically contains items such as your site heading, logo and possibly the main site navigation -->
+    <!-- ARIA: the landmark role "banner" is set as it is the prime heading or internal title of the page --> 
+    <header>
+
+        {#} Template head content {#}
+        {% block header %}
+        {% endblock %}
+        
+    </header>
+
+    {# Main navigation #}
+    <nav role="navigation">
+
+        {#} Template nav content {#}
+        {% block nav %}
+        {% endblock %}
+
+    </nav>
+    
+    <div class="content">
+    
+        {#} Main content block {#}
+        {% block content %}
+        {% endblock %}
+        
+    </div>
+    
+    <footer role="contentinfo">
+    
+        {#} Footer content {#}
+        {% block footer %}
+        {% endblock %}
+        
+    </footer>
+    
+</body>
+</html>
