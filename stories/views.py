@@ -1,43 +1,32 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse_lazy
+from django.views.generic import TemplateView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, FormView
+from braces.views import LoginRequiredMixin
+from stories.forms import StoryJoinForm
+from stories.models import Story, StoryChunk
 
 
-@login_required(login_url=reverse_lazy('signin'))
-def list_stories_view(request):
-    context = {
-        'stories': [],
-    }
-    return render(request, 'list-stories.html', context)
+class StoryListView(LoginRequiredMixin, ListView):
+    template_name = 'list-stories.html'
+    context_object_name = 'stories'
 
 
-@login_required(login_url=reverse_lazy('signin'))
-def new_story_view(request):
-    context = {
-        'form': None,
-    }
-    return render(request, 'new-story.html', context)
+class StoryCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'new-story.html'
+    model = Story
 
 
-@login_required(login_url=reverse_lazy('signin'))
-def join_story_view(request, pk):
-    context = {
-        'story': None,
-    }
-    return render(request, 'join-story.html', context)
+class StoryJoinView(LoginRequiredMixin, FormView):
+    template_name = 'join-story.html'
+    form_class = StoryJoinForm
 
 
-@login_required(login_url=reverse_lazy('signin'))
-def write_story_view(request, pk):
-    context = {
-        'story': None,
-    }
-    return render(request, 'write-story.html', context)
+class StoryWriteView(LoginRequiredMixin, CreateView):
+    template_name = 'write-story.html'
+    model = StoryChunk
 
 
-@login_required(login_url=reverse_lazy('signin'))
-def read_story_view(request, pk):
-    context = {
-        'story': None,
-    }
-    return render(request, 'read-story.html', context)
+class StoryReadView(LoginRequiredMixin, DetailView):
+    template_name = 'read-story.html'
+    model = Story

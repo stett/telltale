@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+
+class Story(models.Model):
+    pass
+
+
+class StoryChunk(models.Model):
+    story = models.ForeignKey(Story)
