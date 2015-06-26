@@ -4,27 +4,37 @@
 Sign Up
 {% endblock %}
 
+{% block body_class %}
+sign-up
+{% endblock %}
+
 {% block content %}
 
-<div class="center">
+<div class="container-fluid">
 
-{#} Form header {#}
-<h1>Create Account</h1>
+    {#} Form header {#}
+    <img src="" alt="Telltale">
+    <h1>Create Account</h1>
 
-{#} Sign-up form {#}
-<form method="post">
-    <label for="email">Email</label>
-    <input id="email" name="email" type="text"/>
+    {#} Sign-up form {#}
+    <form method="post">
 
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password"/>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="email@email.com" />
+        </div>
 
-    <button type="submit">Create Account</button>
-</form>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="•••••••••••" />
+        </div>
 
-{#} Sign-in link {#}
-<label>Already have an account?</label>
-<a href="{% url 'signin' %}">Sign In</a>
+        <button type="submit">Create Account</button>
+    </form>
+
+    {#} Sign-in link {#}
+    <p class="account-link">Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
+
 </div>
 
 {% endblock %}

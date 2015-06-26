@@ -9,22 +9,37 @@
     {% block title %}
     {% endblock %}
     </title>
-    
+
     {#} Meta data {#}
     <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {#} Base styles {#}
-    <link href="{% static 'css/normalize.css' %}" rel="stylesheet" media="all">
+    <!-- <link href="{% static 'css/normalize.css' %}" rel="stylesheet" media="all"> -->
     <link type="text/less" rel="stylesheet" href="{% static 'less/style.less' %}" charset="utf-8">
 
     {#} LESS Compiler {#}
     <script src="{% static 'js/less.js' %}" type="text/javascript"></script>
-    
+
+    {#} Typekit {#}
+    <script src="//use.typekit.net/pgg5noj.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <!-- Compile all scripts together eventually -->
+    {#} Library Scripts {#}
+    <script src="{% static 'lib/jquery-2.1.4.min.js' %}" type="text/javascript"></script>
+
+    {#} Custom Scripts {#}
+    <script src="{% static 'js/custom.js' %}" type="text/javascript"></script>
+
     {% comment %}
-    <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
-    <!--[if lt IE 9]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     {% endcomment %}
 
     {#} Template header content {#}
@@ -32,16 +47,14 @@
     {% endblock %}
 
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
-    <!-- The page header typically contains items such as your site heading, logo and possibly the main site navigation -->
-    <!-- ARIA: the landmark role "banner" is set as it is the prime heading or internal title of the page --> 
-    <header>
+    <header role="banner">
 
         {#} Template head content {#}
         {% block header %}
         {% endblock %}
-        
+
     </header>
 
     {# Main navigation #}
@@ -57,22 +70,22 @@
         {% endblock %}
 
     </nav>
-    
-    <div class="content">
-    
+
+    <main role="main">
+
         {#} Main content block {#}
         {% block content %}
         {% endblock %}
-        
-    </div>
-    
+
+    </main>
+
     <footer role="contentinfo">
-    
+
         {#} Footer content {#}
         {% block footer %}
         {% endblock %}
-        
+
     </footer>
-    
+
 </body>
 </html>
