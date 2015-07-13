@@ -11,14 +11,31 @@ class Story(models.Model):
 
     class Meta:
         app_label = 'stories'
+        verbose_name_plural = 'stories'
+
+    def __str__(self):
+        title = self.title or "Untitled"
+        return "%s by %s" % (title, self.manager)
+
+    def get_first_chunk(self):
+        if self.chunks.count() > 0:
+            return self.chunks.get(prev_chunk__isnull=True)
+        return None
+
+    def get_last_chunk(self):
+        if self.chunks.count() > 0:
+            return self.chunks.get(next_chunk__isnull=True)
+        return None
 
 
 class StoryChunk(models.Model):
-    story = models.ForeignKey('stories.Story')
+    story = models.ForeignKey(
+        'stories.Story',
+        related_name='chunks')
     author = models.ForeignKey('users.User')
-    prev_chunk = models.OneToOneField(
+    next_chunk = models.OneToOneField(
         'stories.StoryChunk',
-        related_name='next_chunk',
+        related_name='prev_chunk',
         null=True,
         blank=True)
     content = models.CharField(
@@ -29,3 +46,6 @@ class StoryChunk(models.Model):
 
     class Meta:
         app_label = 'stories'
+
+    def get_leadin(self):
+        return self.content[self.leadin_position:]

@@ -9,6 +9,26 @@ write-story
 {% endblock %}
 
 {% block content %}
+<form role="form" method="post">
+    {% csrf_token %}
+
+    <div class="writing-area">
+        <div class="form-group">
+            <label for="story-chunk">Start typing your story...</label>
+            <textarea name="story-chunk"
+                      id="id_content"
+                      rows="15">{{ view.get_leadin }}</textarea>
+            <input type="hidden" id="id_leadin_position"/>
+        </div>
+    </div>
+
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock content %}
+
+{% comment %}
+{% block content %}
 
 <header>
     <h1>NICOR Story 3</h1>
@@ -46,3 +66,4 @@ write-story
 </form>
 
 {% endblock %}
+{% endcomment %}
