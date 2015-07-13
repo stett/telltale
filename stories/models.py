@@ -31,8 +31,13 @@ class Story(models.Model):
 class StoryChunk(models.Model):
     story = models.ForeignKey(
         'stories.Story',
-        related_name='chunks')
-    author = models.ForeignKey('users.User')
+        related_name='chunks',
+        null=True,
+        blank=True)
+    author = models.ForeignKey(
+        'users.User',
+        null=True,
+        blank=True)
     next_chunk = models.OneToOneField(
         'stories.StoryChunk',
         related_name='prev_chunk',
@@ -44,6 +49,3 @@ class StoryChunk(models.Model):
 
     class Meta:
         app_label = 'stories'
-
-    def get_leadin(self):
-        return self.content[self.leadin_position:]

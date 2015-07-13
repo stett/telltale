@@ -38,11 +38,18 @@ write-story
     {% csrf_token %}
 
     <div class="writing-area">
-        <span id="prev-chunk-leadin">...A really super long lead-in prefixed the story, in a manner unfitting. I thought to myself,</span>
+        <span id="prev-chunk-leadin">...{{ view.get_story.get_last_chunk.leadin }}</span>
         <div id="chunk-content" class="chunk" contenteditable></div>
         <div id="chunk-leadin" class="chunk" contenteditable></div>
-        <input type="hidden" id="id_content" />
-        <input type="hidden" id="id_leadin"/>
+        <input type="hidden" id="id_content" name="content"/>
+        <input type="hidden" id="id_leadin" name="leadin"/>
+
+        {% if form.errors or form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.errors }}
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
     </div>
 
     <div class="story-stats">

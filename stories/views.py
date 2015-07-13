@@ -21,8 +21,13 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
     form_class = StoryChunkWriteForm
     success_url = reverse_lazy('list-stories')
 
+    def form_invalid(self, form):
+        import ipdb; ipdb.set_trace()
+
     def get_form_kwargs(self):
-        return {'author': self.request.user}
+        kwargs = super(StoryCreateView, self).get_form_kwargs()
+        kwargs.update({'author': self.request.user})
+        return kwargs
 
 
 class StoryWriteView(LoginRequiredMixin, CreateView):
@@ -40,16 +45,15 @@ class StoryWriteView(LoginRequiredMixin, CreateView):
             self.story = Story.objects.get(pk=self.kwargs.get('pk'))
         return self.story
 
-    def get_leadin(self):
-        return self.get_story().get_last_chunk().get_leadin()
-
     def get_settings(self):
         return settings
 
     def get_form_kwargs(self):
-        return {
+        kwargs = super(StoryWriteView, self).get_form_kwargs()
+        kwargs.update({
             'author': self.request.user,
-            'story': self.get_story()}
+            'story': self.get_story()})
+        return kwargs
 
 
 class StoryJoinView(LoginRequiredMixin, FormView):
