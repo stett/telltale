@@ -1,7 +1,21 @@
-<span>[logo]</span>
+<img src="../../static/img/telltale-logo.svg" alt="Telltale">
 
 <ul>
-    <li><a href="{% if top_story %}{% url 'write-story' top_story.pk %}{% else %}#{% endif %}">wr</a></li>
-    <li><a href="{% url 'list-stories' %}">re</a></li>
-    <li><a href="{% url 'new-story' %}">+</a></li>
+    <li data-toggle="tooltip" data-placement="right" title="Add a story"><a href="{% url 'new-story' %}"><i class="glyphicon glyphicon-plus"></i></a></li>
+    <li data-toggle="tooltip" data-placement="right" title="Write a story"><a href="{% if top_story %}{% url 'write-story' top_story.pk %}{% else %}#{% endif %}"><i class="glyphicon glyphicon-pencil"></i></a></li>
+    <li data-toggle="tooltip" data-placement="right" title="Read stories"><a href="{% url 'list-stories' %}"><i class="glyphicon glyphicon-book"></i></a></li>
 </ul>
+
+<div class="dropdown account">
+    <button type="button" class="dropdown-toggle" id="accountMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        JH
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="accountMenu">
+        <li class="dropdown-header">harr041@gmail.com</li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+        <li><a href="#"><i class="glyphicon glyphicon-arrow-left"></i> Logout</a></li>
+        <li role="separator" class="divider"></li>
+        <li class="dropdown-footer"><a href="#"><i class="glyphicon glyphicon-comment"></i> Share feedback</a></li>
+    </ul>
+</div>

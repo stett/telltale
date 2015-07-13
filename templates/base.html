@@ -29,6 +29,7 @@
     <!-- Compile all scripts together eventually -->
     {#} Library Scripts {#}
     <script src="{% static 'lib/jquery-2.1.4.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/bootstrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
 
     {#} Custom Scripts {#}
     <script src="{% static 'js/custom.js' %}" type="text/javascript"></script>
@@ -48,14 +49,6 @@
 
 </head>
 <body class="{% block body_class %}{% endblock %}">
-
-    <header role="banner">
-
-        {#} Template head content {#}
-        {% block header %}
-        {% endblock %}
-
-    </header>
 
     {# Main navigation #}
     <nav role="navigation">
@@ -78,14 +71,6 @@
         {% endblock %}
 
     </main>
-
-    <footer role="contentinfo">
-
-        {#} Footer content {#}
-        {% block footer %}
-        {% endblock %}
-
-    </footer>
 
 </body>
 </html>

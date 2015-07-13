@@ -1,8 +1,71 @@
 {% extends 'base.html' %}
 
 {% block title %}
-List Stories
+My Stories
+{% endblock %}
+
+{% block body_class %}
+list-stories
 {% endblock %}
 
 {% block content %}
+
+<header>
+    <h1>My Stories</h1>
+    <button>New story</button>
+</header>
+
+<ul class="stories">
+    <li>
+        <header>
+            <h2>NICOR Story 3</h2>
+            <span class="label">Your Turn!</span>
+            <ul class="contributors">
+                <li class="active" data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Catherine Barnett"><span>CB</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Deborah Barnett"><span>DB</span></li>
+            </ul>
+        </header>
+        <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et est malesuada, sagittis purus et, feugiat est. Praesent sodales dictum arcu, sit amet porttitor augue consectetur non. Vivamus...</p>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+            </div>
+        </div>
+    </li>
+    <li>
+        <header>
+            <h2>NICOR Story 2</h2>
+            <ul class="contributors">
+                <li data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
+                <li class="active" data-toggle="tooltip" data-placement="bottom" title="Catherine Barnett"><span>CB</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Deborah Barnett"><span>DB</span></li>
+            </ul>
+        </header>
+        <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et est malesuada, sagittis purus et, feugiat est. Praesent sodales dictum arcu, sit amet porttitor augue consectetur non. Vivamus...</p>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+            </div>
+        </div>
+    </li>
+    <li>
+        <header>
+            <h2>NICOR Story 1</h2>
+            <span class="label">Your Turn!</span>
+            <ul class="contributors">
+                <li class="active" data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Catherine Barnett"><span>CB</span></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Deborah Barnett"><span>DB</span></li>
+            </ul>
+        </header>
+        <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et est malesuada, sagittis purus et, feugiat est. Praesent sodales dictum arcu, sit amet porttitor augue consectetur non. Vivamus...</p>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
+            </div>
+        </div>
+    </li>
+</ul>
+
 {% endblock %}

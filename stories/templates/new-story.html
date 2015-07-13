@@ -3,3 +3,32 @@
 {% block title %}
 New Story
 {% endblock %}
+
+{% block body_class %}
+new-story
+{% endblock %}
+
+{% block content %}
+
+<form role="form">
+    <header>
+        <img src="../../static/img/telltale-logo-gray.svg" alt="Telltale">
+        <h1>Create a Story</h1>
+    </header>
+    <div class="form-group story-title-group">
+        <label for="story-title">Title your story</label>
+        <input type="text" name="story-title" id="story-title" placeholder="Title your story" maxlength="25" />
+    </div>
+    <footer>
+        <div class="form-group">
+            <label for="story-invite">Invite up to 5 additional storytellers by email address...</label>
+            <input type="text" name="story-invite" id="story-invite" placeholder="Invite up to 5 additional storytellers by email address..." />
+        </div>
+        <div class="story-create">
+            <button type="submit">Cancel</button>
+            <button type="submit">Create story</button>
+        </div>
+    </footer>
+</form>
+
+{% endblock %}

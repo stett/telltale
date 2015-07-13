@@ -1,81 +1,36 @@
 //
-// Abbreviated LESS mixin library
+// Custom Mixins
 // --------------------------------------------------
 
 
-.box-shadow (@string) {
-  -webkit-box-shadow: @string;
-  -moz-box-shadow: @string;
-  box-shadow: @string;
+.circle(@size) {
+    .size(@size; @size);
+    border-radius: 50%;
 }
 
-.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
-  -webkit-box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
-  -moz-box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
-  box-shadow: @x @y @blur @spread rgba(0, 0, 0, @alpha);
-}
-
-.border-radius (@radius: 5px) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  border-radius: @radius;
-
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-
-.border-radiuses (@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
-  -webkit-border-top-right-radius: @topright;
-  -webkit-border-bottom-right-radius: @bottomright;
-  -webkit-border-bottom-left-radius: @bottomleft;
-  -webkit-border-top-left-radius: @topleft;
-
-  -moz-border-radius-topright: @topright;
-  -moz-border-radius-bottomright: @bottomright;
-  -moz-border-radius-bottomleft: @bottomleft;
-  -moz-border-radius-topleft: @topleft;
-
-  border-top-right-radius: @topright;
-  border-bottom-right-radius: @bottomright;
-  border-bottom-left-radius: @bottomleft;
-  border-top-left-radius: @topleft;
-
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-
-.transition (@transition) {
-  -webkit-transition: @transition;
-  -moz-transition: @transition;
-  -ms-transition: @transition;
-  -o-transition: @transition;
-}
-
-.transform(@string) {
-  -webkit-transform: @string;
-  -moz-transform: @string;
-  -ms-transform: @string;
-  -o-transform: @string;
-}
-
-.rotate (@deg) {
-  -webkit-transform: rotate(@deg);
-  -moz-transform: rotate(@deg);
-  -ms-transform: rotate(@deg);
-  -o-transform: rotate(@deg);
-}
-
-.translate (@x, @y:0) {
-  -webkit-transform: translate(@x, @y);
-  -moz-transform: translate(@x, @y);
-  -ms-transform: translate(@x, @y);
-  -o-transform: translate(@x, @y);
-}
-
-.placeholder(...) {
-    ::-webkit-input-placeholder {color:@arguments}
-    ::-moz-placeholder {color:@arguments}
-    :-ms-input-placeholder {color:@arguments}
+.placeholder-icon(@icon) {
+    &::-webkit-input-placeholder {
+        &:before {
+            padding-right: 10px;
+            font-family: 'Glyphicons Halflings';
+            font-size: 12px;
+            content: @icon;
+        }
+    }
+    &::-moz-placeholder {
+        &:before {
+            padding-right: 10px;
+            font-family: 'Glyphicons Halflings';
+            font-size: 12px;
+            content: @icon;
+        }
+    }
+    &:-ms-input-placeholder {
+        &:before {
+            padding-right: 10px;
+            font-family: 'Glyphicons Halflings';
+            font-size: 12px;
+            content: @icon;
+        }
+    }
 }

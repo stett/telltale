@@ -1,0 +1,109 @@
+//
+// Nav Styles
+// --------------------------------------------------
+
+
+@navbar-width: 85px;
+
+nav {
+    .size(@navbar-width; 100%);
+    float: left;
+    position: fixed;
+    background: @gray-darkest;
+    text-align: center;
+    img {
+        width: 25px;
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+    > ul {
+        .list-unstyled;
+        > li {
+            .circle(40px);
+            .transition(0.3s);
+            position: relative;
+            margin: 20px auto;
+            border: 1px solid #fff;
+            cursor: pointer;
+            > a {
+                .vertical-center;
+                font-size: 18px;
+                color: #fff;
+            }
+            &:hover {
+                border-color: @brand-primary;
+                a {
+                    color: @brand-primary;
+                }
+            }
+        }
+    }
+    .tooltip {
+        width: 120px;
+    }
+}
+
+.account {
+    position: absolute;
+    bottom: 0;
+    width: @navbar-width;
+    height: @navbar-width;
+    background: @gray-darker;
+    button {
+        .transition(0.3s);
+        .circle(40px);
+        .vertical-center;
+        padding: 0;
+        background: transparent;
+        border-color: #fff;
+        border-radius: 50%;
+        font-size: 22px;
+        font-weight: 100;
+        color: #fff;
+        &:hover {
+            border-color: @brand-primary;
+            color: @brand-primary;
+        }
+        &:active {
+            background: transparent;
+        }
+    }
+    .dropdown-menu {
+        top: auto;
+        bottom: 10px;
+        left: 70px;
+        > li {
+            > a {
+                i {
+                    padding-right: 5px;
+                }
+            }
+            &:not(.dropdown-footer) {
+                > a {
+                    font-weight: 600;
+                    color: @gray-base;
+                    &:hover {
+                        background-color: @brand-primary;
+                        color: #fff;
+                    }
+                }
+            }
+            &.dropdown-header {
+                padding-top:10px;
+                font-size: ceil((@font-size-base * 1.14)); // ~16px
+                font-weight: 600;
+                text-transform: uppercase;
+                color: @gray-base;
+            }
+            &.dropdown-footer {
+                a {
+                    text-align: center;
+                    color: @gray;
+                    &:hover {
+                        color: @gray-darker;
+                    }
+                }
+            }
+        }
+    }
+}
