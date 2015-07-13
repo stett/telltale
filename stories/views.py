@@ -15,7 +15,7 @@ class StoryListView(LoginRequiredMixin, ListView):
 
 class StoryCreateView(LoginRequiredMixin, CreateView):
     template_name = 'new-story.html'
-    model = Story
+    model = StoryChunk
     fields = []
 
 
