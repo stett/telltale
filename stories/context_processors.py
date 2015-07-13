@@ -1,4 +1,4 @@
-#from stories.models import Story
+from stories.models import Story
 
 
 def top_story(request):
@@ -7,6 +7,6 @@ def top_story(request):
     work on, into the context.
     """
     context = {
-        'top_story': None,
+        'top_story': Story.objects.filter(current_author=request.user).order_by('?').first(),
     }
     return context
