@@ -40,14 +40,18 @@ $(function() {
 
     // Check for updates to the chunk-content
     $content.on('input', function(e) {
-        text = $content.text();
-        $('#chunk-content-chars').text(text.length)
+        if ($content.text().length > max_story_chunk_size) {
+            $content.text($content.text().substring(0, max_story_chunk_size));
+        }
+        $('#chunk-content-chars').text($content.text().length)
     })
 
     // Check for updates to chunk-leadin
     $leadin.on('input', function(e) {
-        text = $leadin.text();
-        $('#chunk-leadin-chars').text(text.length)
+        if ($leadin.text().length > max_story_leadin_size) {
+            $leadin.text($leadin.text().substring(0, max_story_leadin_size));
+        }
+        $('#chunk-leadin-chars').text($leadin.text().length)
     })
 
     // On change of focus, update the label divs
