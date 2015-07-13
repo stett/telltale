@@ -10,11 +10,13 @@ from stories.models import Story, StoryChunk
 class StoryListView(LoginRequiredMixin, ListView):
     template_name = 'list-stories.html'
     context_object_name = 'stories'
+    model = Story
 
 
 class StoryCreateView(LoginRequiredMixin, CreateView):
     template_name = 'new-story.html'
     model = Story
+    fields = []
 
 
 class StoryJoinView(LoginRequiredMixin, FormView):
