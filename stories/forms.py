@@ -6,7 +6,7 @@ from stories.models import Story, StoryChunk
 class StoryChunkWriteForm(forms.ModelForm):
     class Meta:
         model = StoryChunk
-        fields = ['content', 'leadin_position', 'published']
+        fields = ['content', 'leadin', 'published']
 
     def __init__(self, author, story=None, **kwargs):
         super(StoryChunkWriteForm, self).__init__(**kwargs)

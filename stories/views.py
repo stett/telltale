@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, FormView
+from django.conf import settings
 from braces.views import LoginRequiredMixin
 from stories.forms import StoryChunkWriteForm, StoryJoinForm
 from stories.models import Story, StoryChunk
@@ -41,6 +42,9 @@ class StoryWriteView(LoginRequiredMixin, CreateView):
 
     def get_leadin(self):
         return self.get_story().get_last_chunk().get_leadin()
+
+    def get_settings(self):
+        return settings
 
     def get_form_kwargs(self):
         return {

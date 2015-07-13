@@ -131,32 +131,39 @@
     }
 }
 
+.story-stats {
+    .chunk-label {
+        color: @gray-light;
+        margin-left: 2px;
+        margin-top: 2px;
+        text-transform: uppercase;
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        &.active {
+            color: @brand-primary;
+        }
+    }
+}
+
 .writing-area {
     float: left;
     width: calc(~'100% - 150px');
     font-size: @font-size-large;
 
+    .chunk {
+        display: inline;
+        padding-right: 1px;
+    }
+
     #prev-chunk-leadin {
         color: @gray-light;
     }
 
-    #chunk-content {
-        //border: 1px solid @brand-primary;
-    }
-
     #chunk-leadin {
-        background: @brand-primary;
-        color: white;
-        padding-left: 3px;
-        padding-right: 3px;
-        border-radius: @border-radius-base;
+        color: @brand-primary;
     }
-
-    //textarea {
-    //    .placeholder(@gray-light);
-    //    .input-unstyled;
-    //    font-size: @font-size-large;
-    //}
 }
 
 .story-actions {
