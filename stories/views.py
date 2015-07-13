@@ -85,3 +85,4 @@ class StoryJoinView(LoginRequiredMixin, FormView):
 class StoryReadView(LoginRequiredMixin, DetailView):
     template_name = 'read-story.html'
     model = Story
+    context_object_name = 'story'

@@ -105,8 +105,8 @@ class StoryChunk(models.Model):
         related_name='prev_chunk',
         null=True,
         blank=True)
-    content = models.CharField(max_length=settings.MAX_STORY_CHUNK_SIZE)
-    leadin = models.CharField(
+    content = models.TextField(max_length=settings.MAX_STORY_CHUNK_SIZE)
+    leadin = models.TextField(
         max_length=settings.MAX_STORY_LEADIN_SIZE,
         null=True,
         blank=True)

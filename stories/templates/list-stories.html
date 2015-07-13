@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load markup %}
 
 {% block title %}
 My Stories
@@ -55,7 +56,7 @@ list-stories
     <h2>Finished Stories</h2>
     {% for story in finished_stories %}
     <li>
-        <a href="{% url 'read-story' story.pk">
+        <a href="{% url 'read-story' story.pk %}">
             <header>
                 <h2>{{ story.get_title }}</h2>
                 <ul class="contributors">
@@ -66,7 +67,7 @@ list-stories
                 </ul>
             </header>
             <article>
-                <p class="exerpt">{{ story.get_preview }}</p>
+                <p class="exerpt">{{ story.get_preview|markdown }}</p>
             </article>
         </a>
     </li>

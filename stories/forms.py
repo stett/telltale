@@ -20,6 +20,10 @@ class StoryChunkWriteForm(forms.ModelForm):
         if self.story and self.story.chunks.count() >= self.story.num_chunks:
             self.add_error(None, "Story already has maximum number of chunks.")
 
+        # Make sure the content is long enough
+        if len(cleaned_data['content']) < settings.MIN_STORY_CHUNK_SIZE:
+            self.add_error('content', "Content must be at least %s characters long." % settings.MIN_STORY_CHUNK_SIZE)
+
         # If this isn't the last chunk, make sure there's a leadin
         if self.story and self.story.chunks.count() < self.story.num_chunks - 1:
             if len(cleaned_data['leadin']) < settings.MIN_STORY_LEADIN_SIZE:
