@@ -12,7 +12,9 @@ from stories.models import Story, StoryChunk
 class StoryListView(LoginRequiredMixin, ListView):
     template_name = 'list-stories.html'
     context_object_name = 'stories'
-    model = Story
+
+    def get_queryset(self):
+        return Story.objects.filter(authors=self.request.user)
 
 
 class StoryCreateView(LoginRequiredMixin, CreateView):
