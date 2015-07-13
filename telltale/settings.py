@@ -116,3 +116,7 @@ STATICFILES_DIRS = (
 
 # Access settings
 LOGIN_URL = reverse_lazy('signin')
+
+# Story settings
+MAX_STORY_CHUNK_SIZE = 2000
+MAX_STORY_LEADIN_SIZE = 400
