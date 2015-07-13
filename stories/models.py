@@ -7,6 +7,7 @@ class Story(models.Model):
         max_length=255,
         null=True,
         blank=True)
+    manager = models.ForeignKey('users.User')
 
     class Meta:
         app_label = 'stories'
