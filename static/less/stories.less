@@ -134,11 +134,29 @@
 .writing-area {
     float: left;
     width: calc(~'100% - 150px');
-    textarea {
-        .placeholder(@gray-light);
-        .input-unstyled;
-        font-size: @font-size-large;
+    font-size: @font-size-large;
+
+    #prev-chunk-leadin {
+        color: @gray-light;
     }
+
+    #chunk-content {
+        //border: 1px solid @brand-primary;
+    }
+
+    #chunk-leadin {
+        background: @brand-primary;
+        color: white;
+        padding-left: 3px;
+        padding-right: 3px;
+        border-radius: @border-radius-base;
+    }
+
+    //textarea {
+    //    .placeholder(@gray-light);
+    //    .input-unstyled;
+    //    font-size: @font-size-large;
+    //}
 }
 
 .story-actions {
