@@ -8,13 +8,19 @@ class Story(models.Model):
         max_length=255,
         null=True,
         blank=True)
-    manager = models.ForeignKey('users.User', related_name='managed_stories')
-    authors = models.ManyToManyField('users.User')
+    num_chunks = models.IntegerField(default=settings.STORY_CHUNK_NUMBER)
+    manager = models.ForeignKey(
+        'users.User',
+        related_name='managed_stories')
+    authors = models.ManyToManyField(
+        'users.User',
+        related_name='stories')
     current_author = models.ForeignKey(
         'users.User',
         related_name='current_stories',
         null=True,
         blank=True)
+    finished = models.BooleanField(default=False)
 
     class Meta:
         app_label = 'stories'
@@ -35,6 +41,23 @@ class Story(models.Model):
         if self.chunks.count() > 0:
             return self.chunks.get(next_chunk__isnull=True)
         return None
+
+    def get_progress(self):
+        return int(100 * float(self.chunks.count()) / float(self.num_chunks))
+
+    def get_concatenation(self):
+        cat = ''
+        chunk = self.get_first_chunk()
+        while chunk:
+            cat = '%s%s %s ' % (cat, chunk.content, chunk.leadin)
+            chunk = chunk.next_chunk
+        return cat
+
+    def get_preview(self):
+        cat = self.get_concatenation()
+        if len(cat) > settings.STORY_PREVIEW_SIZE:
+            cat = "%s..." % cat[:(settings.STORY_PREVIEW_SIZE-3)]
+        return cat
 
     def update_current_author(self):
 
@@ -62,6 +85,10 @@ class Story(models.Model):
         # Save the new thing
         self.save()
 
+    def mark_finished(self):
+        self.finished = True
+        self.save()
+
 
 class StoryChunk(models.Model):
     story = models.ForeignKey(
@@ -79,8 +106,14 @@ class StoryChunk(models.Model):
         null=True,
         blank=True)
     content = models.CharField(max_length=settings.MAX_STORY_CHUNK_SIZE)
-    leadin = models.CharField(max_length=settings.MAX_STORY_LEADIN_SIZE)
+    leadin = models.CharField(
+        max_length=settings.MAX_STORY_LEADIN_SIZE,
+        null=True,
+        blank=True)
     published = models.BooleanField(default=False)
 
     class Meta:
         app_label = 'stories'
+
+    def __str__(self):
+        return '...%s...' % self.content[:50]

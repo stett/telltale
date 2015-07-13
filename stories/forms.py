@@ -17,8 +17,13 @@ class StoryChunkWriteForm(forms.ModelForm):
         cleaned_data = super(StoryChunkWriteForm, self).clean()
 
         # Ensure that there aren't already too many chunks
-        if self.story and self.story.chunks.count() >= settings.STORY_CHUNK_NUMBER:
+        if self.story and self.story.chunks.count() >= self.story.num_chunks:
             self.add_error(None, "Story already has maximum number of chunks.")
+
+        # If this isn't the last chunk, make sure there's a leadin
+        if self.story and self.story.chunks.count() < self.story.num_chunks - 1:
+            if len(cleaned_data['leadin']) < settings.MIN_STORY_LEADIN_SIZE:
+                self.add_error('leadin', "Lead-in must be at least %s characters long." % settings.MIN_STORY_LEADIN_SIZE)
 
         return cleaned_data
 
@@ -44,6 +49,13 @@ class StoryChunkWriteForm(forms.ModelForm):
         if prev_chunk:
             prev_chunk.next_chunk = chunk
             prev_chunk.save()
+
+        # If the story is finished, mark it as such. Otherwise, update the
+        # story's current author.
+        if (self.story.chunks.count() == self.story.num_chunks):
+            self.story.mark_finished()
+        else:
+            self.story.update_current_author()
 
         # Return the chunk
         return chunk

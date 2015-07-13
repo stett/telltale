@@ -9,12 +9,16 @@ from stories.forms import StoryChunkWriteForm, StoryJoinForm
 from stories.models import Story, StoryChunk
 
 
-class StoryListView(LoginRequiredMixin, ListView):
+class StoryListView(LoginRequiredMixin, TemplateView):
     template_name = 'list-stories.html'
-    context_object_name = 'stories'
 
-    def get_queryset(self):
-        return Story.objects.filter(authors=self.request.user)
+    def get_context_data(self):
+        data = super(LoginRequiredMixin, self).get_context_data()
+        data.update({
+            'unfinished_stories': self.request.user.stories.filter(finished=False),
+            'finished_stories': self.request.user.stories.filter(finished=True),
+        })
+        return data
 
 
 class StoryCreateView(LoginRequiredMixin, CreateView):
@@ -23,9 +27,6 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
     form_class = StoryChunkWriteForm
     success_url = reverse_lazy('list-stories')
 
-    def get_settings(self):
-        return settings
-
     def form_invalid(self, form):
         import ipdb; ipdb.set_trace()
 
@@ -33,6 +34,13 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
         kwargs = super(StoryCreateView, self).get_form_kwargs()
         kwargs.update({'author': self.request.user})
         return kwargs
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(StoryCreateView, self).get_context_data(*args, **kwargs)
+        data.update({
+            'settings': settings,
+        })
+        return data
 
 
 class StoryWriteView(LoginRequiredMixin, CreateView):
@@ -45,9 +53,6 @@ class StoryWriteView(LoginRequiredMixin, CreateView):
         super(StoryWriteView, self).__init__()
         self.story = None
 
-    def get_settings(self):
-        return settings
-
     def get_story(self):
         if not self.story:
             self.story = Story.objects.get(pk=self.kwargs.get('pk'))
@@ -57,8 +62,19 @@ class StoryWriteView(LoginRequiredMixin, CreateView):
         kwargs = super(StoryWriteView, self).get_form_kwargs()
         kwargs.update({
             'author': self.request.user,
-            'story': self.get_story()})
+            'story': self.get_story(),
+        })
         return kwargs
+
+    def get_context_data(self, *args, **kwargs):
+        data = super(StoryWriteView, self).get_context_data(*args, **kwargs)
+        story = self.get_story()
+        data.update({
+            'settings': settings,
+            'story': story,
+            'final': story.chunks.count() == story.num_chunks - 1,
+        })
+        return data
 
 
 class StoryJoinView(LoginRequiredMixin, FormView):

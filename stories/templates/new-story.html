@@ -12,10 +12,10 @@ new-story
 {% block head %}
 <script src="{% static 'js/story-chunk.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
-    var max_story_chunk_size = {{ view.get_settings.MAX_STORY_CHUNK_SIZE }};
-    var min_story_chunk_size = {{ view.get_settings.MIN_STORY_CHUNK_SIZE }};
-    var max_story_leadin_size = {{ view.get_settings.MAX_STORY_LEADIN_SIZE }};
-    var min_story_leadin_size = {{ view.get_settings.MIN_STORY_LEADIN_SIZE }};
+    var max_story_chunk_size = {{ settings.MAX_STORY_CHUNK_SIZE }};
+    var min_story_chunk_size = {{ settings.MIN_STORY_CHUNK_SIZE }};
+    var max_story_leadin_size = {{ settings.MAX_STORY_LEADIN_SIZE }};
+    var min_story_leadin_size = {{ settings.MIN_STORY_LEADIN_SIZE }};
 </script>
 {% endblock %}
 

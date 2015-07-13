@@ -12,16 +12,16 @@ write-story
 {% block head %}
 <script src="{% static 'js/story-chunk.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
-    var max_story_chunk_size = {{ view.get_settings.MAX_STORY_CHUNK_SIZE }};
-    var min_story_chunk_size = {{ view.get_settings.MIN_STORY_CHUNK_SIZE }};
-    var max_story_leadin_size = {{ view.get_settings.MAX_STORY_LEADIN_SIZE }};
-    var min_story_leadin_size = {{ view.get_settings.MIN_STORY_LEADIN_SIZE }};
+    var max_story_chunk_size = {{ settings.MAX_STORY_CHUNK_SIZE }};
+    var min_story_chunk_size = {{ settings.MIN_STORY_CHUNK_SIZE }};
+    var max_story_leadin_size = {{ settings.MAX_STORY_LEADIN_SIZE }};
+    var min_story_leadin_size = {{ settings.MIN_STORY_LEADIN_SIZE }};
 </script>
 {% endblock %}
 
 {% block content %}
 <header>
-    <h1>{{ view.get_story.get_title }}</h1>
+    <h1>{{ story.get_title }}</h1>
     <ul class="contributors">
         <li class="active" data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
         <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
@@ -29,20 +29,32 @@ write-story
         <li data-toggle="tooltip" data-placement="bottom" title="Deborah Barnett"><span>DB</span></li>
     </ul>
     <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+        <div class="progress-bar"
+             role="progressbar"
+             aria-valuenow="{{ story.get_progress }}"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             style="width: {{ story.get_progress }}%;">
         </div>
     </div>
 </header>
+
+{% if final %}
+<div class="alert alert-info">Final Segment! Make it count!</div>
+{% endif %}
 
 <form role="form" method="post" id="story-chunk-form">
     {% csrf_token %}
 
     <div class="writing-area">
-        <span id="prev-chunk-leadin">...{{ view.get_story.get_last_chunk.leadin }}</span>
+        <span id="prev-chunk-leadin">...{{ story.get_last_chunk.leadin }}</span>
         <div id="chunk-content" class="chunk" contenteditable></div>
-        <div id="chunk-leadin" class="chunk" contenteditable></div>
         <input type="hidden" id="id_content" name="content"/>
+
+        {% if not final %}
+        <div id="chunk-leadin" class="chunk" contenteditable></div>
         <input type="hidden" id="id_leadin" name="leadin"/>
+        {% endif %}
 
         {% if form.errors or form.non_field_errors %}
         <div class="alert alert-danger">
@@ -54,7 +66,10 @@ write-story
 
     <div class="story-stats">
         <div id="chunk-content-label" class="chunk-label active">Main Body &#40;<span id="chunk-content-chars">0</span>&#47;<span id="chunk-content-max-chars"></span>&#41;</div>
+
+        {% if not final %}
         <div id="chunk-leadin-label" class="chunk-label">Lead In &#40;<span id="chunk-leadin-chars">0</span>&#47;<span id="chunk-leadin-max-chars"></span>&#41;</div>
+        {% endif %}
     </div>
 
     <div class="story-submit">
