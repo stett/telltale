@@ -9,6 +9,15 @@ new-story
 {% endblock %}
 
 {% block content %}
+<form role="form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
+
+{% comment %}
+{% block content %}
 
 <form role="form">
     <header>
@@ -32,3 +41,4 @@ new-story
 </form>
 
 {% endblock %}
+{% endcomment %}

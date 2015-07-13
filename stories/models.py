@@ -23,12 +23,9 @@ class StoryChunk(models.Model):
         blank=True)
     content = models.CharField(
         max_length=(settings.MAX_STORY_CHUNK_SIZE +
-                    settings.MAX_STORY_LEADIN_SIZE),
-        null=True,
-        blank=True)
-    leadin_position = models.IntegerField(
-        null=True,
-        blank=True)
+                    settings.MAX_STORY_LEADIN_SIZE))
+    leadin_position = models.IntegerField()
+    published = models.BooleanField(default=False)
 
     class Meta:
         app_label = 'stories'
