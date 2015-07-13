@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}
 New Story
@@ -8,13 +9,49 @@ New Story
 new-story
 {% endblock %}
 
-{% block content %}
-<form role="form" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+{% block head %}
+<script src="{% static 'js/story-chunk.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+    var max_story_chunk_size = {{ view.get_settings.MAX_STORY_CHUNK_SIZE }};
+    var min_story_chunk_size = {{ view.get_settings.MIN_STORY_CHUNK_SIZE }};
+    var max_story_leadin_size = {{ view.get_settings.MAX_STORY_LEADIN_SIZE }};
+    var min_story_leadin_size = {{ view.get_settings.MIN_STORY_LEADIN_SIZE }};
+</script>
 {% endblock %}
+
+{% block content %}
+<header>
+    <h1>Untitled</h1>
+</header>
+
+<form role="form" method="post" id="story-chunk-form">
+    {% csrf_token %}
+
+    <div class="writing-area">
+        <div id="chunk-content" class="chunk" contenteditable></div>
+        <div id="chunk-leadin" class="chunk" contenteditable></div>
+        <input type="hidden" id="id_content" name="content"/>
+        <input type="hidden" id="id_leadin" name="leadin"/>
+
+        {% if form.errors or form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.errors }}
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="story-stats">
+        <div id="chunk-content-label" class="chunk-label active">Main Body &#40;<span id="chunk-content-chars">0</span>&#47;<span id="chunk-content-max-chars"></span>&#41;</div>
+        <div id="chunk-leadin-label" class="chunk-label">Lead In &#40;<span id="chunk-leadin-chars">0</span>&#47;<span id="chunk-leadin-max-chars"></span>&#41;</div>
+    </div>
+
+    <div class="story-submit">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+{% endblock content %}
+
 
 {% comment %}
 {% block content %}

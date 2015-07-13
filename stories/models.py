@@ -7,15 +7,18 @@ class Story(models.Model):
         max_length=255,
         null=True,
         blank=True)
-    manager = models.ForeignKey('users.User')
+    manager = models.ForeignKey('users.User', related_name='managed_stories')
+    authors = models.ManyToManyField('users.User')
 
     class Meta:
         app_label = 'stories'
         verbose_name_plural = 'stories'
 
     def __str__(self):
-        title = self.title or "Untitled"
-        return "%s by %s" % (title, self.manager)
+        return "%s by %s" % (self.get_title(), self.manager)
+
+    def get_title(self):
+        return self.title or "Untitled"
 
     def get_first_chunk(self):
         if self.chunks.count() > 0:

@@ -21,6 +21,9 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
     form_class = StoryChunkWriteForm
     success_url = reverse_lazy('list-stories')
 
+    def get_settings(self):
+        return settings
+
     def form_invalid(self, form):
         import ipdb; ipdb.set_trace()
 
@@ -40,13 +43,13 @@ class StoryWriteView(LoginRequiredMixin, CreateView):
         super(StoryWriteView, self).__init__()
         self.story = None
 
+    def get_settings(self):
+        return settings
+
     def get_story(self):
         if not self.story:
             self.story = Story.objects.get(pk=self.kwargs.get('pk'))
         return self.story
-
-    def get_settings(self):
-        return settings
 
     def get_form_kwargs(self):
         kwargs = super(StoryWriteView, self).get_form_kwargs()

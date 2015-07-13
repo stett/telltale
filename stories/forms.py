@@ -27,6 +27,7 @@ class StoryChunkWriteForm(forms.ModelForm):
         # Create the story object if it doesn't already exist
         if not self.story:
             self.story = Story.objects.create(manager=self.author)
+            self.story.authors.add(self.author)
 
         # Make sure the instance has an author and story
         self.instance.author = self.author
@@ -40,8 +41,9 @@ class StoryChunkWriteForm(forms.ModelForm):
 
         # Connect this chunk to the last chunk in the story which doesn't have
         # a "next_chunk"
-        prev_chunk.next_chunk = chunk
-        prev_chunk.save()
+        if prev_chunk:
+            prev_chunk.next_chunk = chunk
+            prev_chunk.save()
 
         # Return the chunk
         return chunk

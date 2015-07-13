@@ -21,7 +21,7 @@ write-story
 
 {% block content %}
 <header>
-    <h1>NICOR Story 3</h1>
+    <h1>{{ view.get_story.get_title }}</h1>
     <ul class="contributors">
         <li class="active" data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
         <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
@@ -53,8 +53,8 @@ write-story
     </div>
 
     <div class="story-stats">
-        <div id="chunk-content-label" class="chunk-label active"><div></div>Main Body &#40;<span id="chunk-content-chars">0</span>&#47;<span id="chunk-content-max-chars"></span>&#41;</div>
-        <div id="chunk-leadin-label" class="chunk-label"><div></div>Lead In &#40;<span id="chunk-leadin-chars">0</span>&#47;<span id="chunk-leadin-max-chars"></span>&#41;</div>
+        <div id="chunk-content-label" class="chunk-label active">Main Body &#40;<span id="chunk-content-chars">0</span>&#47;<span id="chunk-content-max-chars"></span>&#41;</div>
+        <div id="chunk-leadin-label" class="chunk-label">Lead In &#40;<span id="chunk-leadin-chars">0</span>&#47;<span id="chunk-leadin-max-chars"></span>&#41;</div>
     </div>
 
     <div class="story-submit">
@@ -62,31 +62,3 @@ write-story
     </div>
 </form>
 {% endblock content %}
-
-{% comment %}
-{% block content %}
-
-
-<form role="form">
-    <div class="writing-area">
-        <div class="form-group">
-            <label for="story-chunk">Start typing your story...</label>
-            <textarea name="story-chunk" id="story-chunk" rows="15" placeholder="Start typing your story..."></textarea>
-        </div>
-        <div class="form-group">
-            <label for="lead-in">Type a lead-in for the next storyteller...</label>
-            <textarea name="lead-in" id="lead-in" rows="5" placeholder="Type a lead-in for the next storyteller..."></textarea>
-        </div>
-    </div>
-    <div class="story-actions">
-        <button><i class="glyphicon glyphicon-arrow-right"></i>Skip</button>
-        <button><i class="glyphicon glyphicon-remove-sign"></i>Leave Story</button>
-    </div>
-    <div class="story-submit">
-        <button type="submit">Save as Draft</button>
-        <button type="submit">Submit</button>
-    </div>
-</form>
-
-{% endblock %}
-{% endcomment %}
