@@ -7,6 +7,8 @@ def top_story(request):
     work on, into the context.
     """
     context = {
-        'top_story': Story.objects.filter(current_author=request.user).order_by('?').first(),
+        'top_story': Story.objects.filter(
+            finished=False,
+            current_author=request.user).order_by('?').first(),
     }
     return context

@@ -27,9 +27,6 @@ class StoryCreateView(LoginRequiredMixin, CreateView):
     form_class = StoryChunkWriteForm
     success_url = reverse_lazy('list-stories')
 
-    def form_invalid(self, form):
-        import ipdb; ipdb.set_trace()
-
     def get_form_kwargs(self):
         kwargs = super(StoryCreateView, self).get_form_kwargs()
         kwargs.update({'author': self.request.user})

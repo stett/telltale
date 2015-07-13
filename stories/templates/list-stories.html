@@ -17,6 +17,7 @@ list-stories
 </header>
 
 
+{% if unfinished_stories %}
 <ul class="stories">
     <h2>Unfinished Stories</h2>
     {% for story in unfinished_stories %}
@@ -51,7 +52,9 @@ list-stories
     </li>
     {% endfor %}
 </ul>
+{% endif %}
 
+{% if finished_stories %}
 <ul class="stories">
     <h2>Finished Stories</h2>
     {% for story in finished_stories %}
@@ -73,5 +76,6 @@ list-stories
     </li>
     {% endfor %}
 </ul>
+{% endif %}
 
 {% endblock %}
