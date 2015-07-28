@@ -1,5 +1,6 @@
 from django import forms
 from django.conf import settings
+from itertools import takewhile
 from stories.models import Story, StoryChunk
 
 
@@ -17,8 +18,8 @@ class StoryChunkWriteForm(forms.ModelForm):
         self.story = story
 
     def clean_invitations(self):
-        invitations = self.cleaned_data['invitations']
-        invitations = [invitation.strip() for invitation in invitations.split(',')]
+        invitations = self.cleaned_data['invitations'].split(',')
+        invitations = [invitation.strip() for invitation in takewhile(lambda i: len(i) > 0, invitations)]
         return invitations
 
     def clean(self):
@@ -49,7 +50,8 @@ class StoryChunkWriteForm(forms.ModelForm):
             self.story.authors.add(self.author)
 
         # Add users on the invite list
-        if self.invitations:
+        invitations = self.cleaned_data.get('invitations')
+        if invitations and len(invitations) > 0:
             import ipdb; ipdb.set_trace()
 
         # Make sure the instance has an author and story

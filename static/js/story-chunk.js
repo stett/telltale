@@ -64,7 +64,6 @@ $(function() {
         }
     });
     $leadin.focus(function(e) {
-        console.log(e);
         $('#chunk-content-label').removeClass('active');
         $('#chunk-leadin-label').addClass('active');
         $leadin.css({opacity: 1});

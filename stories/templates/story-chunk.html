@@ -6,12 +6,12 @@
     {% endif %}
 
     {# Show the story main content field #}
-    <div id="chunk-content" class="chunk" contenteditable></div>
-    <input type="hidden" id="id_content" name="content"/>
+    <div id="chunk-content" class="chunk" contenteditable>{{ form.data.content }}</div>
+    <input type="hidden" id="id_content" name="content" value="{{ form.data.content }}"/>
 
     {# Only show the lead-in input field if this isn't the final story chunk #}
     {% if not final %}
-    <div id="chunk-leadin" class="chunk" contenteditable></div>
-    <input type="hidden" id="id_leadin" name="leadin"/>
+    <div id="chunk-leadin" class="chunk" contenteditable>{{ form.data.leadin }}</div>
+    <input type="hidden" id="id_leadin" name="leadin" value="{{ form.data.leadin }}"/>
     {% endif %}
 </div>

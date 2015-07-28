@@ -39,7 +39,7 @@ write-story
 
 
     <footer>
-        {% if user == story.manager %}
+        {% if user == story.manager and not final %}
         {% include "story-invitations.html" %}
         {% endif %}
 
