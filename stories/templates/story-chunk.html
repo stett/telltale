@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <div class="writing-area">
 
     {# If the story had a previous chunk, show its lead-in #}
@@ -14,4 +16,14 @@
     <div id="chunk-leadin" class="chunk" contenteditable>{{ form.data.leadin }}</div>
     <input type="hidden" id="id_leadin" name="leadin" value="{{ form.data.leadin }}"/>
     {% endif %}
+
 </div>
+
+{# The JS to update this stuff #}
+<script src="{% static 'js/story-chunk.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+    var max_story_chunk_size = {{ settings.MAX_STORY_CHUNK_SIZE }};
+    var min_story_chunk_size = {{ settings.MIN_STORY_CHUNK_SIZE }};
+    var max_story_leadin_size = {{ settings.MAX_STORY_LEADIN_SIZE }};
+    var min_story_leadin_size = {{ settings.MIN_STORY_LEADIN_SIZE }};
+</script>

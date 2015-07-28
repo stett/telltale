@@ -9,16 +9,6 @@ Write Story Chunk
 write-story
 {% endblock %}
 
-{% block head %}
-<script src="{% static 'js/story-chunk.js' %}" type="text/javascript"></script>
-<script type="text/javascript">
-    var max_story_chunk_size = {{ settings.MAX_STORY_CHUNK_SIZE }};
-    var min_story_chunk_size = {{ settings.MIN_STORY_CHUNK_SIZE }};
-    var max_story_leadin_size = {{ settings.MAX_STORY_LEADIN_SIZE }};
-    var min_story_leadin_size = {{ settings.MIN_STORY_LEADIN_SIZE }};
-</script>
-{% endblock %}
-
 {% block content %}
 <header>
     <h1>{{ story.get_title }}</h1>
@@ -34,9 +24,7 @@ write-story
     {% csrf_token %}
 
     {% include "story-chunk.html" %}
-    {% include "form-errors.html" %}
     {% include "story-stats.html" %}
-
 
     <footer>
         {% if user == story.manager and not final %}
@@ -48,4 +36,5 @@ write-story
         </div>
     </footer>
 </form>
+{% include "form-errors.html" %}
 {% endblock content %}

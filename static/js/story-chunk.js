@@ -1,6 +1,5 @@
 $(function() {
 
-
     function setSelectionRange(input, selectionStart, selectionEnd) {
         if (input.setSelectionRange) {
             input.focus();
@@ -39,20 +38,24 @@ $(function() {
     $('#chunk-leadin-label').click(function() {$leadin.focus(); });
 
     // Check for updates to the chunk-content
-    $content.on('input', function(e) {
+    var update_content = function() {
         if ($content.text().length > max_story_chunk_size) {
             $content.text($content.text().substring(0, max_story_chunk_size));
         }
         $('#chunk-content-chars').text($content.text().length)
-    })
+    }
+    $content.on('input', update_content);
+    update_content();
 
     // Check for updates to chunk-leadin
-    $leadin.on('input', function(e) {
+    var update_leadin = function() {
         if ($leadin.text().length > max_story_leadin_size) {
             $leadin.text($leadin.text().substring(0, max_story_leadin_size));
         }
         $('#chunk-leadin-chars').text($leadin.text().length)
-    })
+    }
+    $leadin.on('input', update_leadin)
+    update_leadin();
 
     // On change of focus, update the label divs
     $content.focus(function(e) {

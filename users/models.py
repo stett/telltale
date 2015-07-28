@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class UserManager(BaseUserManager):
+
     def create_user(self, email, password):
         u = self.model(
             email=email,
@@ -25,6 +26,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     just email addresses for now.
     """
     email = models.EmailField(max_length=255, unique=True)
+    temporary_password_date = models.DateField(
+        null=True,
+        blank=True,
+        help_text='If set, it will be assumed that this is a new user or they '
+                  'have opted to reset their password, and this field records '
+                  'the date on which that happened.')
     is_staff = models.BooleanField(
         default=False,
         help_text='Designates whether the user can log into this admin site.')

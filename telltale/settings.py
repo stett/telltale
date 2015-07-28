@@ -113,6 +113,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+# Email backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Access settings
 LOGIN_URL = reverse_lazy('signin')
@@ -121,6 +123,7 @@ LOGIN_URL = reverse_lazy('signin')
 STORY_CHUNK_NUMBER = 4
 STORY_AUTHOR_SPACING = 3
 STORY_PREVIEW_SIZE = 200
+MIN_STORY_AUTHOR_NUMBER = 3
 MAX_STORY_CHUNK_SIZE = 2000
 MIN_STORY_CHUNK_SIZE = 20
 MAX_STORY_LEADIN_SIZE = 400
