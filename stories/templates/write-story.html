@@ -22,21 +22,8 @@ write-story
 {% block content %}
 <header>
     <h1>{{ story.get_title }}</h1>
-    <ul class="contributors">
-        <li class="active" data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
-        <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
-        <li data-toggle="tooltip" data-placement="bottom" title="Catherine Barnett"><span>CB</span></li>
-        <li data-toggle="tooltip" data-placement="bottom" title="Deborah Barnett"><span>DB</span></li>
-    </ul>
-    <div class="progress">
-        <div class="progress-bar"
-             role="progressbar"
-             aria-valuenow="{{ story.get_progress }}"
-             aria-valuemin="0"
-             aria-valuemax="100"
-             style="width: {{ story.get_progress }}%;">
-        </div>
-    </div>
+    {% include "story-authors.html" %}
+    {% include "story-progress-bar.html" %}
 </header>
 
 {% if final %}
@@ -46,34 +33,19 @@ write-story
 <form role="form" method="post" id="story-chunk-form">
     {% csrf_token %}
 
-    <div class="writing-area">
-        <span id="prev-chunk-leadin">...{{ story.get_last_chunk.leadin }}</span>
-        <div id="chunk-content" class="chunk" contenteditable></div>
-        <input type="hidden" id="id_content" name="content"/>
+    {% include "story-chunk.html" %}
+    {% include "form-errors.html" %}
+    {% include "story-stats.html" %}
 
-        {% if not final %}
-        <div id="chunk-leadin" class="chunk" contenteditable></div>
-        <input type="hidden" id="id_leadin" name="leadin"/>
+
+    <footer>
+        {% if user == story.manager %}
+        {% include "story-invitations.html" %}
         {% endif %}
 
-        {% if form.errors or form.non_field_errors %}
-        <div class="alert alert-danger">
-            {{ form.errors }}
-            {{ form.non_field_errors }}
+        <div class="story-submit">
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
-        {% endif %}
-    </div>
-
-    <div class="story-stats">
-        <div id="chunk-content-label" class="chunk-label active">Main Body &#40;<span id="chunk-content-chars">0</span>&#47;<span id="chunk-content-max-chars"></span>&#41;</div>
-
-        {% if not final %}
-        <div id="chunk-leadin-label" class="chunk-label">Lead In &#40;<span id="chunk-leadin-chars">0</span>&#47;<span id="chunk-leadin-max-chars"></span>&#41;</div>
-        {% endif %}
-    </div>
-
-    <div class="story-submit">
-        <button type="submit">Submit</button>
-    </div>
+    </footer>
 </form>
 {% endblock content %}

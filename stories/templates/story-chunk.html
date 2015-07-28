@@ -1,0 +1,17 @@
+<div class="writing-area">
+
+    {# If the story had a previous chunk, show its lead-in #}
+    {% if story.get_last_chunk %}
+    <span id="prev-chunk-leadin">...{{ story.get_last_chunk.leadin }}</span>
+    {% endif %}
+
+    {# Show the story main content field #}
+    <div id="chunk-content" class="chunk" contenteditable></div>
+    <input type="hidden" id="id_content" name="content"/>
+
+    {# Only show the lead-in input field if this isn't the final story chunk #}
+    {% if not final %}
+    <div id="chunk-leadin" class="chunk" contenteditable></div>
+    <input type="hidden" id="id_leadin" name="leadin"/>
+    {% endif %}
+</div>

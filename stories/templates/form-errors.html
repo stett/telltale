@@ -1,0 +1,6 @@
+{% if form.errors or form.non_field_errors %}
+<div class="alert alert-danger">
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+</div>
+{% endif %}

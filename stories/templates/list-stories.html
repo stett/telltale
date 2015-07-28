@@ -30,24 +30,15 @@ list-stories
                 {% else %}
                 <span class="label">Writing: {{ story.current_author }}</span>
                 {% endif %}
-                <ul class="contributors">
-                    <li class="active" data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
-                    <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
-                    <li data-toggle="tooltip" data-placement="bottom" title="Catherine Barnett"><span>CB</span></li>
-                    <li data-toggle="tooltip" data-placement="bottom" title="Deborah Barnett"><span>DB</span></li>
-                </ul>
+
+                {% include "story-authors.html" %}
             </header>
+
             {% if story.current_author == request.user %}
             <p class="excerpt">...{{ story.get_last_chunk.leadin }}...</p>
             {% endif %}
-            <div class="progress">
-                <div class="progress-bar"
-                     role="progressbar"
-                     aria-valuenow="{{ story.get_progress }}"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     style="width: {{ story.get_progress }}%;"></div>
-            </div>
+
+            {% include "story-progress-bar.html" %}
         </a>
     </li>
     {% endfor %}
@@ -62,12 +53,7 @@ list-stories
         <a href="{% url 'read-story' story.pk %}">
             <header>
                 <h2>{{ story.get_title }}</h2>
-                <ul class="contributors">
-                    <li class="active" data-toggle="tooltip" data-placement="bottom" title="Jonathan Harrell"><span>JH</span></li>
-                    <li data-toggle="tooltip" data-placement="bottom" title="Steven Barnett"><span>SB</span></li>
-                    <li data-toggle="tooltip" data-placement="bottom" title="Catherine Barnett"><span>CB</span></li>
-                    <li data-toggle="tooltip" data-placement="bottom" title="Deborah Barnett"><span>DB</span></li>
-                </ul>
+                {% include "story-authors.html" %}
             </header>
             <article>
                 <p class="exerpt">{{ story.get_preview|markdown }}</p>

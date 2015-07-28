@@ -26,31 +26,20 @@ new-story
 
 <form role="form" method="post" id="story-chunk-form">
     {% csrf_token %}
+    {% include "story-chunk.html" %}
+    {% include "form-errors.html" %}
+    {% include "story-stats.html" %}
 
-    <div class="writing-area">
-        <div id="chunk-content" class="chunk" contenteditable></div>
-        <div id="chunk-leadin" class="chunk" contenteditable></div>
-        <input type="hidden" id="id_content" name="content"/>
-        <input type="hidden" id="id_leadin" name="leadin"/>
+    <footer>
+        {% include "story-invitations.html" %}
 
-        {% if form.errors or form.non_field_errors %}
-        <div class="alert alert-danger">
-            {{ form.errors }}
-            {{ form.non_field_errors }}
+        <div class="story-create">
+            <a href="{% url 'list-stories' %}" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create story</button>
         </div>
-        {% endif %}
-    </div>
-
-    <div class="story-stats">
-        <div id="chunk-content-label" class="chunk-label active">Main Body &#40;<span id="chunk-content-chars">0</span>&#47;<span id="chunk-content-max-chars"></span>&#41;</div>
-        <div id="chunk-leadin-label" class="chunk-label">Lead In &#40;<span id="chunk-leadin-chars">0</span>&#47;<span id="chunk-leadin-max-chars"></span>&#41;</div>
-    </div>
-
-    <div class="story-submit">
-        <button type="submit">Submit</button>
-    </div>
+    </footer>
 </form>
-{% endblock content %}
+{% endblock %}
 
 
 {% comment %}

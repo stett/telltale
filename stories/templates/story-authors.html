@@ -1,0 +1,10 @@
+<ul class="contributors">
+    {% for author in story.authors.all %}
+    <li class="{% if author == story.current_author %}active{% endif %}"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="{{ author.get_full_name }}">
+        <span>{{ author.get_initials }}</span>
+    </li>
+    {% endfor %}
+</ul>
