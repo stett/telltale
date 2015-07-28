@@ -10,16 +10,24 @@
     {% endif %}
 </ul>
 
+{% if user %}
 <div class="dropdown account">
-    <button type="button" class="dropdown-toggle" id="accountMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        JH
+    <button type="button"
+            class="dropdown-toggle"
+            id="accountMenu"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="true">
+        {{ user.get_initials }}
     </button>
+
     <ul class="dropdown-menu" aria-labelledby="accountMenu">
-        <li class="dropdown-header">harr041@gmail.com</li>
+        <li class="dropdown-header">{{ user.get_full_name }}</li>
         <li role="separator" class="divider"></li>
-        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
-        <li><a href="#"><i class="glyphicon glyphicon-arrow-left"></i> Logout</a></li>
+        <li><a href="{% url 'user-settings' %}"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+        <li><a href="{% url 'signout' %}"><i class="glyphicon glyphicon-arrow-left"></i> Logout</a></li>
         <li role="separator" class="divider"></li>
         <li class="dropdown-footer"><a href="#"><i class="glyphicon glyphicon-comment"></i> Share feedback</a></li>
     </ul>
 </div>
+{% endif %}

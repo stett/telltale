@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse_lazy
 
@@ -32,3 +32,8 @@ def signin(request):
 def settings(request):
     context = {}
     return render(request, 'settings.html', context)
+
+
+def signout(request):
+    logout(request)
+    return redirect('signin')

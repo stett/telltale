@@ -49,7 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # Methods
 
     def get_initials(self):
-        return self.get_short_name()[0:1]
+        return self.get_short_name()[0:1].upper()
 
     def get_short_name(self):
         return self.email.split('@')[0]
