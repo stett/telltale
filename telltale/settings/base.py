@@ -3,6 +3,7 @@ import os
 
 # Import secret per-machine stuff
 from telltale.settings.secret import *
+SECRET_KEY = SECRET_KEY or "secret-key"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+touch telltale/settings/secret.py
+
 # Activate the virtualenv
 . env/bin/activate &&
 
