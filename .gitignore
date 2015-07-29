@@ -2,4 +2,5 @@
 *.pyc
 .static/
 env/
+secret.py
 
