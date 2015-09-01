@@ -7,7 +7,7 @@ try:
 except:
     SECRET_KEY = "secret-key"
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -104,6 +104,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, ".static")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+print(STATICFILES_DIRS)
 
 # Access settings
 LOGIN_URL = reverse_lazy('signin')
