@@ -19,23 +19,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {#} Base styles {#}
-    <!-- <link href="{% static 'css/normalize.css' %}" rel="stylesheet" media="all"> -->
-    <link type="text/less" rel="stylesheet" href="{% static 'less/style.less' %}" charset="utf-8">
-
-    {#} LESS Compiler {#}
-    <script src="{% static 'js/less.js' %}" type="text/javascript"></script>
+    <link type="text/less" rel="stylesheet" href="{% static 'build/css/main.css' %}" charset="utf-8">
 
     {#} Typekit {#}
     <script src="//use.typekit.net/pgg5noj.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 
-    <!-- Compile all scripts together eventually -->
-    {#} Library Scripts {#}
-    <script src="{% static 'lib/jquery-2.1.4.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'lib/bootstrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
-
     {#} Custom Scripts {#}
-    <script src="{% static 'js/custom.js' %}" type="text/javascript"></script>
+    <script src="{% static 'build/js/main.js' %}" type="text/javascript"></script>
 
     {#} Template header content {#}
     {% block head %}
@@ -50,8 +41,8 @@
 
 
     {# Temporary flag marking this as a project in beta #}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/ribbon.css' %}" charset="utf-8">
-    <div class="corner-ribbon top-right sticky white shadow">Open Beta</div>
+    <!--<link type="text/css" rel="stylesheet" href="{% static 'css/ribbon.css' %}" charset="utf-8">-->
+    <!--<div class="corner-ribbon top-right sticky white shadow">Open Beta</div>-->
 
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -71,11 +62,13 @@
     </nav>
 
     <main role="main">
+        <div class="grid-frame">
 
-        {#} Main content block {#}
-        {% block content %}
-        {% endblock %}
+            {#} Main content block {#}
+            {% block content %}
+            {% endblock %}
 
+        </div>
     </main>
 
 </body>

@@ -11,42 +11,57 @@ list-stories
 
 {% block content %}
 
-<header>
-    <h1>My Stories</h1>
-    <button>New story</button>
-</header>
+<div class="vertical grid-block">
 
-
-{% if unfinished_stories %}
-<ul class="stories">
-    <h2>Unfinished Stories</h2>
-    {% for story in unfinished_stories %}
-    {% if story.current_author == request.user %}
-    <li class="current-author"><a href="{% url 'write-story' story.pk %}">
-    {% else %}
-    <li class="other-author"><a href="#">
-    {% endif %}
+    <div class="grid-block">
+        <div class="grid-container">
             <header>
-                <h2>{{ story.get_title }}</h2>
-                {% if story.current_author == request.user %}
-                <span class="label">Your Turn!</span>
-                {% else %}
-                <span class="label">Writing: {{ story.current_author }}</span>
-                {% endif %}
-
-                {% include "story-authors.html" %}
+                <h1>My Stories</h1>
+                <button class="button">New story</button>
             </header>
+        </div>
+    </div>
 
-            {% if story.current_author == request.user %}
-            <p class="excerpt">...{{ story.get_last_chunk.leadin }}...</p>
-            {% endif %}
 
-            {% include "story-progress-bar.html" %}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+    {% if unfinished_stories %}
+    <div class="grid-block">
+        <div class="grid-container">
+            <section class="block-list">
+                <header>Unfinished Stories</header>
+                <ul>
+                    {% for story in unfinished_stories %}
+                        {% if story.current_author == request.user %}
+                        <li><a href="{% url 'write-story' story.pk %}">
+                        {% else %}
+                        <li><a href="#">
+                        {% endif %}
+                            <header>
+                                <h2>{{ story.get_title }}</h2>
+                                {% if story.current_author == request.user %}
+                                <span>Your Turn!</span>
+                                {% else %}
+                                <span>Writing: {{ story.current_author }}</span>
+                                {% endif %}
+
+                                {% include "story-authors.html" %}
+                            </header>
+
+                            {% if story.current_author == request.user %}
+                            <p>...{{ story.get_last_chunk.leadin }}...</p>
+                            {% endif %}
+
+                            {% include "story-progress-bar.html" %}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+
 
 {% if finished_stories %}
 <ul class="stories">

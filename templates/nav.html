@@ -1,33 +1,22 @@
-<img src="../../static/img/telltale-logo.svg" alt="Telltale">
-
-<ul>
-    <li data-toggle="tooltip" data-placement="right" title="Add a story"><a href="{% url 'new-story' %}"><i class="glyphicon glyphicon-plus"></i></a></li>
-    {% if top_story %}
-    <li data-toggle="tooltip" data-placement="right" title="Write a story"><a href="{% url 'write-story' top_story.pk %}"><i class="glyphicon glyphicon-pencil"></i></a></li>
+<div class="menu-group primary">
+    <div class="menu-group-left">
+        <ul class="menu-bar primary">
+            {% if user.stories.all %}
+            <li><a href="{% url 'list-stories' %}">Read stories</a></li>
+            {% endif %}
+            {% if top_story %}
+            <li><a href="{% url 'write-story' top_story.pk %}">Contribute to a story</a></li>
+            {% endif %}
+            <li><a href="{% url 'new-story' %}">Add a story</a></li>
+        </ul>
+    </div>
+    {% if user %}
+    <div class="menu-group-right">
+        <ul class="icon-left primary menu-bar">
+            <li><a href="#">Share feedback</a></li>
+            <li><a href="{% url 'user-settings' %}">Settings</a></li>
+            <li><a href="{% url 'signout' %}">Logout</a></li>
+        </ul>
+    </div>
     {% endif %}
-    {% if user.stories.all %}
-    <li data-toggle="tooltip" data-placement="right" title="Read stories"><a href="{% url 'list-stories' %}"><i class="glyphicon glyphicon-book"></i></a></li>
-    {% endif %}
-</ul>
-
-{% if user %}
-<div class="dropdown account">
-    <button type="button"
-            class="dropdown-toggle"
-            id="accountMenu"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="true">
-        {{ user.get_initials }}
-    </button>
-
-    <ul class="dropdown-menu" aria-labelledby="accountMenu">
-        <li class="dropdown-header">{{ user.get_full_name }}</li>
-        <li role="separator" class="divider"></li>
-        <li><a href="{% url 'user-settings' %}"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
-        <li><a href="{% url 'signout' %}"><i class="glyphicon glyphicon-arrow-left"></i> Logout</a></li>
-        <li role="separator" class="divider"></li>
-        <li class="dropdown-footer"><a href="#"><i class="glyphicon glyphicon-comment"></i> Share feedback</a></li>
-    </ul>
 </div>
-{% endif %}

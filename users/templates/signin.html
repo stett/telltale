@@ -10,36 +10,35 @@ entry
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="grid-block">
+    <div class="grid-container">
 
-    {#} Form header {#}
-    <img src="" alt="Telltale">
-    <h1>Sign In</h1>
+        {#} Form header {#}
+        <h1>Sign In</h1>
 
-    {#} Sign-up form {#}
-    <form method="post">
-        {% csrf_token %}
+        {#} Sign-up form {#}
+        <form method="post">
+            {% csrf_token %}
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="email@email.com" />
-        </div>
+            <label>
+                Email Address <input type="email" id="email" name="email" placeholder="email@email.com" />
+            </label>
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="•••••••••••" />
-        </div>
+            <label>
+                Password <input type="password" id="password" name="password" placeholder="•••••••••••" />
+            </label>
 
-        <button type="submit">Sign In</button>
+            <button type="submit" class="button">Sign In</button>
 
-        {% if error %}
-        <div class="error">{{ error }}</div>
-        {% endif %}
-    </form>
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+        </form>
 
-    {#} Create-account link {#}
-    <p class="account-link">Don't have an account? <a href="{% url 'signup' %}">Create Account</a></p>
+        {#} Create-account link {#}
+        <p>Don't have an account? <a href="{% url 'signup' %}">Create Account</a></p>
 
+    </div>
 </div>
 
 {% endblock %}
